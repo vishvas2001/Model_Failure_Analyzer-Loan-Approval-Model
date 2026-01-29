@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import os
+import subprocess
 
 # -----------------------------
 # CONFIG
@@ -12,6 +14,28 @@ MODEL_PATHS = {
 }
 
 st.set_page_config(page_title="Loan Approval System", layout="centered")
+
+# AUTO TRAIN
+
+def ensure_models_exist():
+    if not os.path.exists("ml/models"):
+        os.makedirs("ml/models")
+
+    required_models = [
+        "decision_tree.pkl",
+        "random_forest.pkl",
+        "gradient_boosting.pkl"
+    ]
+
+    models_missing = any(
+        not os.path.exists(os.path.join("ml/models", m))
+        for m in required_models
+    )
+
+    if models_missing:
+        st.warning("Models not found. Training models… (first run only)")
+        subprocess.run(["python", "ml/train.py"], check=True)
+
 
 
 # -----------------------------
