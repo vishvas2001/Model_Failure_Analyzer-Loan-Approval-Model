@@ -18,8 +18,7 @@ st.set_page_config(page_title="Loan Approval System", layout="centered")
 # AUTO TRAIN
 
 def ensure_models_exist():
-    if not os.path.exists("ml/models"):
-        os.makedirs("ml/models")
+    os.makedirs("ml/models", exist_ok=True)
 
     required_models = [
         "decision_tree.pkl",
@@ -33,9 +32,13 @@ def ensure_models_exist():
     )
 
     if models_missing:
-        st.warning("Models not found. Training models… (first run only)")
-        subprocess.run(["python", "ml/train.py"], check=True)
+        st.warning("⚙️ Models not found. Training models (first run only)...")
 
+        # 🔥 IMPORT AND RUN TRAINING DIRECTLY (NO SUBPROCESS)
+        from ml.train import main as train_models
+        train_models()
+
+        st.success("✅ Models trained successfully!")
 
 
 # -----------------------------
