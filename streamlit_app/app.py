@@ -41,9 +41,23 @@ def ensure_models_exist():
 # -----------------------------
 # LOAD MODELS
 # -----------------------------
-@st.cache_resource
+
 def load_models():
-    return {name: joblib.load(path) for name, path in MODEL_PATHS.items()}
+    models = {}
+    for name, path in MODEL_PATHS.items():
+        if not os.path.exists(path):
+            st.error(f"❌ Model file not found: {path}")
+            st.stop()
+        models[name] = joblib.load(path)
+    return models
+
+
+# 🔥 ENSURE MODELS FIRST
+ensure_models_exist()
+
+# 🔥 THEN LOAD MODELS (NO CACHE)
+models = load_models()
+
 
 
 models = load_models()
