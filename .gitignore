@@ -1,0 +1,61 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+
+# =========================
+# Virtual Environments
+# =========================
+env/
+venv/
+.venv/
+ml_env/
+ENV/
+
+# =========================
+# Jupyter Notebook
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Model Artifacts (IMPORTANT)
+# =========================
+*.pkl
+*.joblib
+
+# =========================
+# ML Outputs / Generated Files
+# =========================
+ml/outputs/
+ml/models/
+
+# =========================
+# Streamlit
+# =========================
+.streamlit/
+streamlit_app/.streamlit/
+
+# =========================
+# OS / Editor
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Data (OPTIONAL)
+# =========================
+# Uncomment if dataset is large or private
+# ml/data/*.csv
